@@ -347,8 +347,8 @@ width: 100%;
 .landing_about_section p{
     color: var(--primary-text);
     margin-bottom: 2rem;
-
 }
+
 /*05product card design*/
 .landing_product_section .product-card{
     position: relative;
