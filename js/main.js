@@ -23,10 +23,10 @@ $(document).ready(function() {
  $(document).ready(function() {
     "use strict";
 
-    // 1) Page load fade-in
+    //Page load fade-in
     $("body").css("opacity", 0).animate({opacity: 1}, 400);
     
-    // 2) Sticky navbar
+    //Sticky navbar
     $(window).scroll(function() {
         if ($(this).scrollTop() > 50) {
             $(".navbar").addClass("header-scrolled");
@@ -36,7 +36,7 @@ $(document).ready(function() {
     });
     
 
-    // 4) Back-to-top button
+    // Back-to-top button
     if ($("#backTop").length === 0) {
         $("body").append('<button id="backTop" title="Back to top">↑</button>');
         $("#backTop").css({
@@ -67,35 +67,6 @@ $(document).ready(function() {
         $("html, body").animate({scrollTop: 0}, 500);
     });
 
-    // 5) About section scroll animation
-    $(".landing_about_section .about-content").css({
-        opacity: 0,
-        transform: "translateY(30px)"
-    });
-
-    function animateAbout() {
-        $(".landing_about_section .about-content").each(function() {
-            let $el = $(this);
-            let elTop = $el.offset().top;
-            let winBottom = $(window).scrollTop() + $(window).height();
-
-            if (winBottom > elTop + 50 && !$el.data("animated")) {
-                $el.data("animated", true);
-                $el.animate({opacity: 1, translateY: 0}, {
-                    duration: 600,
-                    step: function(now, fx) {
-                        $el.css("transform", "translateY(" + (30 - now * 30) + "px)");
-                    }
-                });
-            }
-        });
-    }
-
-    animateAbout();
-    $(window).on("scroll resize", animateAbout);
-
-});
-   
 //about page
     // 1) Page load fade-in
     $("body").css("opacity", 0).animate({opacity: 1}, 400);
@@ -124,3 +95,74 @@ $(document).ready(function() {
     });
 
 });
+
+//contact page
+$(document).ready(function(){
+
+    // Contact form submit handling
+    $('.contact-form button').click(function(e){
+        e.preventDefault(); // Form submit block
+
+        // Form values
+        var name = $('input[placeholder="your Name"]').val();
+        var email = $('input[placeholder="your email"]').val();
+        var address = $('input[placeholder="your adress"]').val();
+        var number = $('input[placeholder="your number"]').val();
+        var message = $('textarea').val();
+
+        // Check if any field is empty
+        if(name == "" || email == "" || address == "" || number == "" || message == ""){
+            alert("Please fill all fields before submitting!");
+            return false;
+        }
+
+        // Show submitted data in console
+        console.log("Form Submitted!");
+        console.log("Name:", name);
+        console.log("Email:", email);
+        console.log("Address:", address);
+        console.log("Number:", number);
+        console.log("Message:", message);
+
+
+        // Clear form after submit
+        $('.contact-form input, .contact-form textarea').val('');
+    });
+
+    // Input focus effect
+    $('.contact-form input, .contact-form textarea').focus(function(){
+        $(this).css('border', '2px solid #28a745'); 
+    }).blur(function(){
+        $(this).css('border', '1px solid #ced4da'); 
+    });
+
+});
+// About section scroll animation
+    $(".landing_about_section .about-content").css({
+        opacity: 0,
+        transform: "translateY(30px)"
+    });
+
+    function animateAbout() {
+        $(".landing_about_section .about-content").each(function() {
+            let $el = $(this);
+            let elTop = $el.offset().top;
+            let winBottom = $(window).scrollTop() + $(window).height();
+
+            if (winBottom > elTop + 50 && !$el.data("animated")) {
+                $el.data("animated", true);
+                $el.animate({opacity: 1, translateY: 0}, {
+                    duration: 600,
+                    step: function(now, fx) {
+                        $el.css("transform", "translateY(" + (30 - now * 30) + "px)");
+                    }
+                });
+            }
+        });
+    }
+
+    animateAbout();
+    $(window).on("scroll resize", animateAbout);
+
+});
+   
